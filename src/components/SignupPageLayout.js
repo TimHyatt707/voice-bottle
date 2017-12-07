@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "native-base";
 
-export default class LoginPageLayout extends Component {
+export default class SignupPageLayout extends Component {
   render() {
     return (
       <Container style={styles.container}>

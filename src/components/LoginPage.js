@@ -5,14 +5,14 @@ import Header from "./HeaderComponent";
 import LoginForm from "./LoginForm";
 import { Button } from "native-base";
 
-export default function LoginPage({ token }) {
+export default function LoginPage({ token, onLoginUser }) {
   if (token) {
     Actions.map();
   } else
     return (
       <LoginPageLayout>
         <Header title={"Login"} />
-        <LoginForm />
+        <LoginForm onLoginUser={onLoginUser} />
       </LoginPageLayout>
     );
 }
