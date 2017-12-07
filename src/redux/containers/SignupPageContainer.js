@@ -1,19 +1,17 @@
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
-import LoginPage from "../../components/LoginPage";
+import SignupPage from "../../components/SignupPage";
 
 function mapStateToProps(state, ownProps) {
-  return {
-    token: state.token
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onLoginUser: credentials => dispatch(loginUserProcess(credentials))
+    onCreateUser = user => dispatch(createUserProcess(user))
   };
 }
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(connectToStore)(LoginPage);
+export default compose(connectToStore)(SignupPage);
