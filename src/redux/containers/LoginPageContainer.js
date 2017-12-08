@@ -1,6 +1,7 @@
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import LoginPage from "../../components/LoginPage";
+import loginUserProcess from "../thunks/loginUserProcess";
 
 function mapStateToProps(state, ownProps) {
   return {

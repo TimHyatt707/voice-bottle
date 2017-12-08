@@ -1,7 +1,7 @@
-import env from "../env";
+import env from "../../env";
 
 export default function createUser(user) {
-  return fetch(`${env.API_BASE_URL}/signup`, {
+  return fetch(`{env.API_BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -23,6 +23,6 @@ export default function createUser(user) {
       };
     })
     .catch(error => {
-      throw new Error(error);
+      return error;
     });
 }

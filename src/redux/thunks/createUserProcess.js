@@ -3,10 +3,10 @@ import createUser from "../../api/createUser";
 export default function createUserProcess(user) {
   return async (dispatch, getState) => {
     try {
-      const user = await createUser(user);
-      return user;
+      const createdUser = await createUser(user);
+      return createdUser;
     } catch (error) {
-      throw new Error(error);
+      return error;
     }
   };
 }

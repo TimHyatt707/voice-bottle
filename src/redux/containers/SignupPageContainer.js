@@ -1,6 +1,7 @@
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import SignupPage from "../../components/SignupPage";
+import createUserProcess from "../thunks/createUserProcess";
 
 function mapStateToProps(state, ownProps) {
   return {};
@@ -8,7 +9,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onCreateUser = user => dispatch(createUserProcess(user))
+    onCreateUser: user => dispatch(createUserProcess(user))
   };
 }
 
