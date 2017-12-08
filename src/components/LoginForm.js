@@ -35,11 +35,13 @@ export default class LoginForm extends Component {
     try {
       const username = this.state.username;
       const password = this.state.password;
-      if (!username || password) {
+      if (!username || !password) {
         return this.setState({ emptyFields: true });
       } else {
         this.setState({ emptyFields: false });
-        const credentials = Object.assign({}, username, password);
+        const credentials = {};
+        credentials.username = username;
+        credentials.password = password;
         const user = await this.props.onLoginUser(credentials);
         if (!user) {
           this.setState({ hasError: true });
@@ -49,6 +51,7 @@ export default class LoginForm extends Component {
         }
       }
     } catch (error) {
+      console.log(error);
       this.setState({ hasError: true });
     }
   }

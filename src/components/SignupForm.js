@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
+import { Text, Alert } from "react-native";
 import { Container, Content, Form, Item, Input, Button } from "native-base";
+import debug from "../api/debug";
 
 export default class SignupForm extends Component {
   constructor(props) {
@@ -42,27 +43,30 @@ export default class SignupForm extends Component {
       if (!email || !username || !password) {
         this.setState({ uniqueError: false });
         return this.setState({ emptyFields: true });
-      } else if (!password.length < 6) {
+      } else if (password.length < 6) {
         this.setState({ uniqueError: false });
         this.setState({ emptyFields: false });
         return this.setState({ shortPass: true });
       } else {
-        const credentials = Object.assign({}, email, username, password);
+        const credentials = {};
+        credentials.email = email;
+        credentials.username = username;
+        credentials.password = password;
         this.setState({ emptyFields: false });
         const createdUser = await this.props.onCreateUser(credentials);
         if (createdUser.id) {
-          //TODO: redirect to login page
-          return Alert.alert("Account successfully created!");
+          Alert.alert("Account successfully created!");
+          Actions.login();
         } else {
           throw new Error(createdUser);
         }
       }
     } catch (error) {
-      if (error.message === "Username/email already exists") {
-        return this.setState({ uniqueError: true });
-      } else {
-        return this.setState({ downServer: true });
-      }
+      return this.setState({ uniqueError: true });
+      //TODO:add more error handling
+      // else {
+      //   return this.setState({ downServer: true });
+      // }
     }
   }
 
@@ -106,7 +110,7 @@ export default class SignupForm extends Component {
       errorMsg = (
         <Text style={{ color: "red", marginLeft: "25%" }}>
           {" "}
-          Internal Server Error!{" "}
+          Server is down!{" "}
         </Text>
       );
     }
@@ -133,6 +137,7 @@ export default class SignupForm extends Component {
             <Input
               placeholder="Password"
               onChangeText={this._onChangePassword}
+              secureTextEntry={true}
             />
           </Item>
         </Form>
