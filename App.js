@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import setupStore from "./src/redux/setupStore";
 import LoginPageContainer from "./src/redux/containers/LoginPageContainer";
 import SignupPageContainer from "./src/redux/containers/SignupPageContainer";
+import MapPageContainer from "./src/redux/containers/MapPageContainer";
 
 const store = setupStore();
 
@@ -19,8 +20,8 @@ export default class App extends Component {
               hideNavBar={true}
             />
             <Scene key="signup" component={SignupPageContainer} />
-            {/* <Scene key="map" component={MapPage} />
-            <Scene key="record" component={RecordPage} /> */}
+            <Scene key="map" component={MapPageContainer} hideNavBar={true} />
+            {/* <Scene key="record" component={RecordPage} /> */}
           </Stack>
         </Router>
       </Provider>
