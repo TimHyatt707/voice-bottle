@@ -1,7 +1,8 @@
-import env from "../../env";
+import Config from "react-native-config";
 
 export default function createUser(user) {
-  return fetch(`{env.API_BASE_URL}/signup`, {
+  console.log(Config.REACT_APP_BASE_URL);
+  return fetch(`${Config.REACT_APP_BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -23,6 +24,7 @@ export default function createUser(user) {
       };
     })
     .catch(error => {
+      console.log(error);
       return error;
     });
 }

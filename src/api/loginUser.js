@@ -1,7 +1,7 @@
-import env from "../../env";
+import Config from "react-native-config";
 
 export default function loginUser(credentials) {
-  return fetch(`${env.API_BASE_URL}/login`, {
+  return fetch(`${Config.REACT_APP_BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

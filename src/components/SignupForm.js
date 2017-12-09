@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { Text, Alert } from "react-native";
-import { Container, Content, Form, Item, Input, Button } from "native-base";
+import { Actions } from "react-native-router-flux";
+import {
+  Container,
+  Content,
+  Form,
+  Item,
+  Input,
+  Button,
+  Spinner
+} from "native-base";
 import debug from "../api/debug";
 
 export default class SignupForm extends Component {
@@ -48,6 +57,7 @@ export default class SignupForm extends Component {
         this.setState({ emptyFields: false });
         return this.setState({ shortPass: true });
       } else {
+        this.setState({ loading: true });
         const credentials = {};
         credentials.email = email;
         credentials.username = username;
@@ -56,8 +66,9 @@ export default class SignupForm extends Component {
         const createdUser = await this.props.onCreateUser(credentials);
         if (createdUser.id) {
           Alert.alert("Account successfully created!");
-          Actions.login();
+          return Actions.pop();
         } else {
+          this.setState({ loading: false });
           throw new Error(createdUser);
         }
       }
@@ -80,6 +91,10 @@ export default class SignupForm extends Component {
           }}
         >
           <Spinner color="blue" />
+          <Text style={{ marginLeft: "34%", color: "black" }}>
+            {" "}
+            Creating Account...{" "}
+          </Text>
         </Content>
       );
     if (this.state.emptyFields) {
@@ -100,7 +115,7 @@ export default class SignupForm extends Component {
     }
     if (this.state.uniqueError) {
       errorMsg = (
-        <Text style={{ color: "red", marginLeft: "25%" }}>
+        <Text style={{ color: "red", marginLeft: "19%" }}>
           {" "}
           Email and username must be unique!{" "}
         </Text>

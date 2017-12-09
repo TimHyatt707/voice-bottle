@@ -38,20 +38,21 @@ export default class LoginForm extends Component {
       if (!username || !password) {
         return this.setState({ emptyFields: true });
       } else {
+        this.setState({ loading: true });
         this.setState({ emptyFields: false });
         const credentials = {};
         credentials.username = username;
         credentials.password = password;
         const user = await this.props.onLoginUser(credentials);
         if (!user) {
+          this.setState({ loading: false });
           this.setState({ hasError: true });
         } else {
-          //Temporary alert -- will later route user to the map page
-          Alert.alert("Login Successful!");
+          Actions.map();
         }
       }
     } catch (error) {
-      console.log(error);
+      this.setState({ loading: false });
       this.setState({ hasError: true });
     }
   }
@@ -66,6 +67,10 @@ export default class LoginForm extends Component {
           }}
         >
           <Spinner color="blue" />
+          <Text style={{ marginLeft: "36%", color: "black" }}>
+            {" "}
+            Loading Map...{" "}
+          </Text>
         </Content>
       );
     if (this.state.hasError) {
