@@ -69,7 +69,7 @@ export default class LoginForm extends Component {
           <Spinner color="blue" />
           <Text style={{ marginLeft: "36%", color: "black" }}>
             {" "}
-            Loading Map...{" "}
+            Logging In...{" "}
           </Text>
         </Content>
       );
