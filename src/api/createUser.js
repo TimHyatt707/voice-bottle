@@ -1,7 +1,6 @@
 import Config from "react-native-config";
 
 export default function createUser(user) {
-  console.log(Config.REACT_APP_BASE_URL);
   return fetch(`${Config.REACT_APP_BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -24,7 +23,6 @@ export default function createUser(user) {
       };
     })
     .catch(error => {
-      console.log(error);
       return error;
     });
 }
