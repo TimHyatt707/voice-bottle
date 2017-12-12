@@ -1,6 +1,9 @@
 export default function rootReducer(
   currentState = {
-    token: null
+    token: null,
+    markers: [],
+    latitude: null,
+    longitude: null
   },
   action
 ) {
@@ -9,6 +12,17 @@ export default function rootReducer(
       return {
         ...currentState,
         token: action.token
+      };
+    case "SET_MARKERS":
+      return {
+        ...currentState,
+        markers: action.markers
+      };
+    case "SET_COORDS":
+      return {
+        ...currentState,
+        latitude: action.coords.latitude,
+        longitude: action.coords.longitude
       };
     default:
       return currentState;
