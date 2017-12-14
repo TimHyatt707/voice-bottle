@@ -1,6 +1,6 @@
 export default function rootReducer(
   currentState = {
-    token: null,
+    id: null,
     markers: [],
     latitude: null,
     longitude: null
@@ -8,6 +8,11 @@ export default function rootReducer(
   action
 ) {
   switch (action.type) {
+    case "SET_AUTHORIZATION":
+      return {
+        ...currentState,
+        id: action.id
+      };
     case "SET_TOKEN":
       return {
         ...currentState,

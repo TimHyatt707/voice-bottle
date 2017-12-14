@@ -12,16 +12,9 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    // onMount: () => dispatch(getAuthenticationProcess()),
     onLoginUser: credentials => dispatch(loginUserProcess(credentials))
   };
 }
-//TODO: ADD token authentication on bootup so user doesnt have to sign in everytime
-// const willMount = lifecycle({
-//   async componentWillMount() {
-//     await this.props.onMount();
-//   }
-// });
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
 
