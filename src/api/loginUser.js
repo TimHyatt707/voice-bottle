@@ -17,7 +17,11 @@ export default function loginUser(credentials) {
     })
     .then(record => {
       return {
-        token: record.authentication.token
+        token: record.token,
+        id: record.id
       };
+    })
+    .catch(error => {
+      console.log(error.message);
     });
 }
