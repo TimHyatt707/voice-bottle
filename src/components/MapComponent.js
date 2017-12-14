@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Spinner, Content, Icon } from "native-base";
+import { View, Spinner, Content, Button } from "native-base";
 import { StyleSheet, Text } from "react-native";
 import MapView from "react-native-maps";
 
@@ -10,12 +10,15 @@ export default class Map extends Component {
   }
 
   _handleMarkers(e) {
-    this.props.getNearbyMarkers({
-      coordinates: `${this.props.latitude},${this.props.longitude}`
-    });
+    this.props.getNearbyMarkers &&
+      this.props.getNearbyMarkers({
+        coordinates: `${this.props.latitude},${this.props.longitude}`
+      });
   }
 
   render() {
+    let lat = 0;
+    let long = 0;
     if (this.props.latitude === null && this.props.longitude === null) {
       this.props.getLocation();
       return (
@@ -32,16 +35,20 @@ export default class Map extends Component {
         </Content>
       );
     } else {
+      lat = this.props.latitude || 0;
+      long = this.props.longitude || 0;
       return (
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: this.props.latitude,
-            longitude: this.props.longitude,
+            latitude: lat,
+            longitude: long,
             latitudeDelta: 0.096,
             longitudeDelta: 0.092
           }}
+          scrollEnabled={false}
           zoomEnabled={false}
+          moveOnMarkerPress={false}
           minZoomLevel={16}
           maxZoomLevel={20}
           onMapReady={this._handleMarkers}
@@ -49,23 +56,26 @@ export default class Map extends Component {
           <MapView.Marker
             title="You"
             coordinate={{
-              latitude: this.props.latitude,
-              longitude: this.props.longitude
+              latitude: lat,
+              longitude: long
             }}
             image={require("../assets/boat2.png")}
           />
-          {this.props.markers.map((marker, index) => {
-            let coords = marker.coordinates.split(",");
-            let lat = ~~coords[0];
-            let long = ~~coords[1];
-            return (
-              <MapView.Marker
-                key={marker.id}
-                title={marker.title}
-                coordinate={{ latitude: lat, longitude: long }}
-              />
-            );
-          })}
+          {this.props.markers
+            ? this.props.markers.map((marker, index) => {
+                let coords = marker.coordinates.split(",");
+                let lat = parseFloat(coords[0]);
+                let long = parseFloat(coords[1]);
+                return (
+                  <MapView.Marker
+                    key={marker.id}
+                    title={marker.title}
+                    coordinate={{ latitude: lat, longitude: long }}
+                    image={require("../assets/speaker1.png")}
+                  />
+                );
+              })
+            : null}
         </MapView>
       );
     }
@@ -75,6 +85,7 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
+    zIndex: 0,
     top: 0,
     left: 0,
     right: 0,
@@ -83,6 +94,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   map: {
+    marginTop: 60,
     position: "absolute",
     top: 0,
     left: 0,

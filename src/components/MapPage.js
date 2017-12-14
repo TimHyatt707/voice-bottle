@@ -12,7 +12,7 @@ export default function MapPage({
 }) {
   return (
     <MapPageLayout>
-      <Header title={"Map"} />
+      <Header title={"Map"} recordingToggle={true} />
       <Map
         getLocation={getLocation}
         getNearbyMarkers={getNearbyMarkers}

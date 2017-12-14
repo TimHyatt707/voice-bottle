@@ -44,7 +44,7 @@ export default class LoginForm extends Component {
         credentials.username = username;
         credentials.password = password;
         const user = await this.props.onLoginUser(credentials);
-        if (!user) {
+        if (user === "Login Failed") {
           this.setState({ loading: false });
           this.setState({ hasError: true });
         } else {
