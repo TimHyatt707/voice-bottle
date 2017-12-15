@@ -1,13 +1,12 @@
 import Config from "react-native-config";
 
-export default function createPin(id, token, pin) {
-  return fetch(`${Config.REACT_APP_BASE_URL}/users/${id}/pins`, {
-    method: "POST",
+export default function deletePin(id, token) {
+  return fetch(`${Config.REACT_APP_BASE_URL}/pins/${id}`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `${token}`
-    },
-    body: JSON.stringify(pin)
+    }
   })
     .then(response => {
       if (response.status === 200) {
@@ -18,6 +17,7 @@ export default function createPin(id, token, pin) {
       return record;
     })
     .catch(error => {
+      console.log(error.message);
       return error;
     });
 }
