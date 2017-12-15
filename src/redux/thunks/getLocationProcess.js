@@ -13,7 +13,8 @@ export default function getLocationProcess() {
         },
         {
           enableHighAccuracy: true,
-          timeout: 20000
+          maximumAge: 240000,
+          timeout: 120000
         }
       );
     } catch (error) {

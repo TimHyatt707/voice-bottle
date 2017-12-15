@@ -29,6 +29,21 @@ export default function rootReducer(
         latitude: action.coords.latitude,
         longitude: action.coords.longitude
       };
+    case "SET_PINS":
+      return {
+        ...currentState,
+        pins: action.pins
+      };
+    case "ADD_PIN":
+      return {
+        ...currentState,
+        markers: [...currentState.markers, actions.createdPin]
+      };
+    case "DELETE_PIN":
+      return {
+        ...currentState,
+        markers: markers.filter(marker => marker !== action.deletedPin)
+      };
     default:
       return currentState;
   }
