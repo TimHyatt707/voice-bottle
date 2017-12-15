@@ -24,7 +24,7 @@ export default class HeaderComponent extends Component {
   }
 
   _handleMessages() {
-    console.log("WIP");
+    Actions.messages();
   }
 
   render() {

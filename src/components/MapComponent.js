@@ -69,7 +69,7 @@ export default class Map extends Component {
                 return (
                   <MapView.Marker
                     key={marker.id}
-                    title={marker.title}
+                    title={marker.name}
                     coordinate={{ latitude: lat, longitude: long }}
                     image={require("../assets/speaker1.png")}
                   />

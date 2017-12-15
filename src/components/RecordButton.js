@@ -27,8 +27,10 @@ export default class RecordButton extends Component {
       pin,
       this.props.token
     );
-    console.log(createdPin);
     if (createdPin) {
+      this.props.getNearbyMarkers({
+        coordinates: `${this.props.latitude},${this.props.longitude}`
+      });
       Actions.pop();
     } else {
       Alert.alert("Invalid message");

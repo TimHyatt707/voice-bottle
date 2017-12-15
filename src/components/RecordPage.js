@@ -8,12 +8,14 @@ export default function RecordPage({
   latitude,
   longitude,
   token,
-  onSubmitMessage
+  onSubmitMessage,
+  getNearbyMarkers
 }) {
   return (
     <RecordPageLayout>
       <Header title="Record" />
       <RecordButton
+        getNearbyMarkers={getNearbyMarkers}
         onSubmitMessage={onSubmitMessage}
         id={id}
         latitude={latitude}
