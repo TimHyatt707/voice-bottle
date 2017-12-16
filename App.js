@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Root } from "native-base";
 import { Router, Stack, Scene } from "react-native-router-flux";
 import { Provider } from "react-redux";
 import setupStore from "./src/redux/setupStore";
@@ -13,21 +14,23 @@ const store = setupStore();
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <Stack key="root">
-            <Scene
-              key="login"
-              component={LoginPageContainer}
-              hideNavBar={true}
-            />
-            <Scene key="signup" component={SignupPageContainer} />
-            <Scene key="map" component={MapPageContainer} hideNavBar={true} />
-            <Scene key="record" component={RecordPageContainer} />
-            <Scene key="messages" component={MessagesPageContainer} />
-          </Stack>
-        </Router>
-      </Provider>
+      <Root>
+        <Provider store={store}>
+          <Router>
+            <Stack key="root">
+              <Scene
+                key="login"
+                component={LoginPageContainer}
+                hideNavBar={true}
+              />
+              <Scene key="signup" component={SignupPageContainer} />
+              <Scene key="map" component={MapPageContainer} hideNavBar={true} />
+              <Scene key="record" component={RecordPageContainer} />
+              <Scene key="messages" component={MessagesPageContainer} />
+            </Stack>
+          </Router>
+        </Provider>
+      </Root>
     );
   }
 }
