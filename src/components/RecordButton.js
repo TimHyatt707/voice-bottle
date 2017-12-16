@@ -31,7 +31,7 @@ export default class RecordButton extends Component {
       this.props.getNearbyMarkers({
         coordinates: `${this.props.latitude},${this.props.longitude}`
       });
-      Actions.pop();
+      Actions.map();
     } else {
       Alert.alert("Invalid message");
     }

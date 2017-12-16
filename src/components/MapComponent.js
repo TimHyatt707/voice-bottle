@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { View, Spinner, Content, Button } from "native-base";
+import { View, Spinner, Content, Button, ActionSheet } from "native-base";
 import { StyleSheet, Text } from "react-native";
 import MapView from "react-native-maps";
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this._handleMarkers = this._handleMarkers.bind(this);
   }
 
@@ -17,6 +18,7 @@ export default class Map extends Component {
   }
 
   render() {
+    console.log(this.props.latitude, this.props.longitude);
     let lat = 0;
     let long = 0;
     if (this.props.latitude === null && this.props.longitude === null) {
@@ -66,12 +68,27 @@ export default class Map extends Component {
                 let coords = marker.coordinates.split(",");
                 let lat = parseFloat(coords[0]);
                 let long = parseFloat(coords[1]);
+                let options;
+                if (!marker.message) {
+                  options = ["no message :(", "CLOSE"];
+                } else options = [`says "${marker.message}"`, "CLOSE"];
                 return (
                   <MapView.Marker
                     key={marker.id}
                     title={marker.name}
                     coordinate={{ latitude: lat, longitude: long }}
                     image={require("../assets/speaker1.png")}
+                    onPress={() =>
+                      ActionSheet.show(
+                        {
+                          options: options,
+                          cancelButtonIndex: 1,
+                          title: `${marker.name}`
+                        },
+                        buttonIndex => {
+                          this.setState({ clicked: options[buttonIndex] });
+                        }
+                      )}
                   />
                 );
               })

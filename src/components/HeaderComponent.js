@@ -30,24 +30,22 @@ export default class HeaderComponent extends Component {
   render() {
     const recordBtn = (
       <TouchableOpacity>
-        <Button danger rounded>
-          <Text onPress={this._handleRecord}> RECORD </Text>
+        <Button danger rounded onPress={this._handleRecord}>
+          <Text> RECORD </Text>
         </Button>
       </TouchableOpacity>
     );
     const messagesBtn = (
       <TouchableOpacity>
-        <Button success rounded>
-          <Text onPress={this._handleMessages}> MESSAGES </Text>
+        <Button success rounded onPress={this._handleMessages}>
+          <Text> MESSAGES </Text>
         </Button>
       </TouchableOpacity>
     );
     return (
       <Header style={{ zIndex: 1 }}>
-        <Left>
-          <Title>
-            {this.props.title} <Icon name="flask" />
-          </Title>
+        <Left style={{ flex: 1 }}>
+          <Title>{this.props.title}</Title>
         </Left>
         <Body>{this.props.recordingToggle ? recordBtn : null}</Body>
         <Right>{this.props.recordingToggle ? messagesBtn : null}</Right>
