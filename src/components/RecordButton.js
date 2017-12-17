@@ -8,6 +8,7 @@ export default class RecordButton extends Component {
     super(props);
 
     this.state = {
+      loading: false,
       name: "",
       message: ""
     };
@@ -18,6 +19,7 @@ export default class RecordButton extends Component {
   }
 
   async _handleSubmit() {
+    this.setState({ loading: true });
     let pin = {};
     pin.name = this.state.name;
     pin.message = this.state.message;
@@ -33,6 +35,7 @@ export default class RecordButton extends Component {
       });
       Actions.map();
     } else {
+      this.setState({ loading: false });
       Alert.alert("Invalid message");
     }
   }
@@ -46,28 +49,44 @@ export default class RecordButton extends Component {
   }
 
   render() {
-    return (
-      <Content style={{ marginTop: "10%" }}>
-        <Form>
-          <Item>
-            <Input
-              placeholder="Name of Message"
-              onChangeText={this._changeName}
-            />
-          </Item>
-          <Item>
-            <Input placeholder="Message" onChangeText={this._changeMessage} />
-          </Item>
-        </Form>
-        <Button
-          block
-          success
-          style={{ marginTop: "10%", marginLeft: "10%", width: "80%" }}
-          onPress={this._handleSubmit}
+    if (this.state.loading) {
+      return (
+        <Content
+          style={{
+            marginTop: "50%"
+          }}
         >
-          <Text> Submit </Text>
-        </Button>
-      </Content>
-    );
+          <Spinner color="blue" />
+          <Text style={{ marginLeft: "30%", color: "black" }}>
+            {" "}
+            Creating Message...{" "}
+          </Text>
+        </Content>
+      );
+    } else {
+      return (
+        <Content style={{ marginTop: "10%" }}>
+          <Form>
+            <Item>
+              <Input
+                placeholder="Name of Message"
+                onChangeText={this._changeName}
+              />
+            </Item>
+            <Item>
+              <Input placeholder="Message" onChangeText={this._changeMessage} />
+            </Item>
+          </Form>
+          <Button
+            block
+            success
+            style={{ marginTop: "10%", marginLeft: "10%", width: "80%" }}
+            onPress={this._handleSubmit}
+          >
+            <Text> Submit </Text>
+          </Button>
+        </Content>
+      );
+    }
   }
 }

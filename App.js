@@ -23,10 +23,22 @@ export default class App extends Component {
                 component={LoginPageContainer}
                 hideNavBar={true}
               />
-              <Scene key="signup" component={SignupPageContainer} />
+              <Scene
+                key="signup"
+                component={SignupPageContainer}
+                hideNavBar={true}
+              />
               <Scene key="map" component={MapPageContainer} hideNavBar={true} />
-              <Scene key="record" component={RecordPageContainer} />
-              <Scene key="messages" component={MessagesPageContainer} />
+              <Scene
+                key="record"
+                component={RecordPageContainer}
+                hideNavBar={true}
+              />
+              <Scene
+                key="messages"
+                component={MessagesPageContainer}
+                hideNavBar={true}
+              />
             </Stack>
           </Router>
         </Provider>

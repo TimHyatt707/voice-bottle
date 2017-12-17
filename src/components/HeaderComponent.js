@@ -7,16 +7,18 @@ import {
   Left,
   Title,
   Button,
-  Right
+  Right,
+  Icon
 } from "native-base";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { Actions } from "react-native-router-flux";
 
 export default class HeaderComponent extends Component {
   constructor(props) {
     super(props);
+
     this._handleRecord = this._handleRecord.bind(this);
     this._handleMessages = this._handleMessages.bind(this);
+    this._handleBack = this._handleBack.bind(this);
   }
 
   _handleRecord() {
@@ -25,6 +27,10 @@ export default class HeaderComponent extends Component {
 
   _handleMessages() {
     Actions.messages();
+  }
+
+  _handleBack() {
+    Actions.pop();
   }
 
   render() {
@@ -44,7 +50,19 @@ export default class HeaderComponent extends Component {
     );
     return (
       <Header style={{ zIndex: 1 }}>
-        <Left style={{ flex: 1 }}>
+        <Left
+          style={{
+            flex: 1,
+            flexDirection: "row"
+          }}
+        >
+          {this.props.hasBack ? (
+            <Icon
+              name="arrow-back"
+              style={{ color: "white", marginRight: "25%" }}
+              onPress={this._handleBack}
+            />
+          ) : null}
           <Title>{this.props.title}</Title>
         </Left>
         <Body>{this.props.recordingToggle ? recordBtn : null}</Body>

@@ -12,7 +12,7 @@ export default function MessagesPage({
 }) {
   return (
     <MessagesPageLayout>
-      <Header title="Messages" />
+      <Header title="Messages" hasBack={true} />
       <MessagesList
         id={id}
         markers={markers}

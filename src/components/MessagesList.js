@@ -58,8 +58,7 @@ export default class MessagesList extends Component {
             onPress={this._handleToggle}
             style={{
               alignSelf: "center",
-              marginTop: "10%",
-              marginBottom: "5%"
+              margin: "10%"
             }}
           >
             <Text>

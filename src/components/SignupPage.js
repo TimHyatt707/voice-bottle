@@ -6,7 +6,7 @@ import SignupForm from "./SignupForm";
 export default function SignupPage({ onCreateUser }) {
   return (
     <SignupPageLayout>
-      <Header title="Signup" />
+      <Header title="Signup" hasBack={true} />
       <SignupForm onCreateUser={onCreateUser} />
     </SignupPageLayout>
   );

@@ -13,7 +13,7 @@ export default function RecordPage({
 }) {
   return (
     <RecordPageLayout>
-      <Header title="Record" />
+      <Header title="Record" hasBack={true} />
       <RecordButton
         getNearbyMarkers={getNearbyMarkers}
         onSubmitMessage={onSubmitMessage}
