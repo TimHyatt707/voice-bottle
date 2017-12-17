@@ -36,6 +36,7 @@ export default class Map extends Component {
         </Content>
       );
     } else {
+      this.props.watchLocation();
       lat = this.props.latitude || 0;
       long = this.props.longitude || 0;
       return (

@@ -2,6 +2,7 @@ import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import MapPage from "../../components/MapPage";
 import getLocationProcess from "../thunks/getLocationProcess";
+import watchLocationProcess from "../thunks/watchLocationProcess";
 import getNearbyMarkersProcess from "../thunks/getNearbyMarkersProcess";
 
 function mapStateToProps(state, ownProps) {
@@ -17,7 +18,8 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     getLocation: () => dispatch(getLocationProcess()),
     getNearbyMarkers: coordinates =>
-      dispatch(getNearbyMarkersProcess(coordinates))
+      dispatch(getNearbyMarkersProcess(coordinates)),
+    watchLocation: () => dispatch(watchLocationProcess())
   };
 }
 

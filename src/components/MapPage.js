@@ -5,6 +5,7 @@ import Map from "./MapComponent";
 
 export default function MapPage({
   getLocation,
+  watchLocation,
   getNearbyMarkers,
   markers,
   latitude,
@@ -15,6 +16,7 @@ export default function MapPage({
       <Header title={"Map"} recordingToggle={true} />
       <Map
         getLocation={getLocation}
+        watchLocation={watchLocation}
         getNearbyMarkers={getNearbyMarkers}
         markers={markers}
         latitude={latitude}

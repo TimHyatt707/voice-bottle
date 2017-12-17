@@ -49,7 +49,7 @@ export default class HeaderComponent extends Component {
       </TouchableOpacity>
     );
     return (
-      <Header style={{ zIndex: 1 }}>
+      <Header>
         <Left
           style={{
             flex: 1,
