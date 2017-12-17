@@ -3,7 +3,8 @@ export default function rootReducer(
     id: null,
     markers: [],
     latitude: null,
-    longitude: null
+    longitude: null,
+    selectedPinId: null
   },
   action
 ) {
@@ -34,12 +35,27 @@ export default function rootReducer(
         ...currentState,
         markers: [...currentState.markers, action.createdPin]
       };
+    case "UPDATE_PIN":
+      return {
+        ...currentState,
+        markers: currentState.markers.map(
+          marker =>
+            marker.id !== action.updatedMessage.id
+              ? marker
+              : action.updatedMessage
+        )
+      };
     case "DELETE_PIN":
       return {
         ...currentState,
         markers: currentState.markers.filter(
           marker => marker.id !== action.deletedPin.id
         )
+      };
+    case "SET_SELECTED_PIN_ID":
+      return {
+        ...currentState,
+        selectedPinId: action.id
       };
     default:
       return currentState;

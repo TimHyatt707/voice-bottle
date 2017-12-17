@@ -8,7 +8,8 @@ export default function MessagesPage({
   markers,
   token,
   getPins,
-  onDeletePin
+  onDeletePin,
+  setSelectedPinId
 }) {
   return (
     <MessagesPageLayout>
@@ -19,6 +20,7 @@ export default function MessagesPage({
         token={token}
         getPins={getPins}
         onDeletePin={onDeletePin}
+        setSelectedPinId={setSelectedPinId}
       />
     </MessagesPageLayout>
   );

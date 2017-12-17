@@ -8,6 +8,7 @@ import SignupPageContainer from "./src/redux/containers/SignupPageContainer";
 import MapPageContainer from "./src/redux/containers/MapPageContainer";
 import RecordPageContainer from "./src/redux/containers/RecordPageContainer";
 import MessagesPageContainer from "./src/redux/containers/MessagesPageContainer";
+import UpdateMessagePageContainer from "./src/redux/containers/UpdateMessagePageContainer";
 
 const store = setupStore();
 
@@ -37,6 +38,11 @@ export default class App extends Component {
               <Scene
                 key="messages"
                 component={MessagesPageContainer}
+                hideNavBar={true}
+              />
+              <Scene
+                key="update"
+                component={UpdateMessagePageContainer}
                 hideNavBar={true}
               />
             </Stack>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Spinner, Content, List, ListItem, Text } from "native-base";
 import { TouchableOpacity } from "react-native";
+import { Actions } from "react-native-router-flux";
 import getLocation from "../redux/thunks/getLocationProcess";
 
 export default class MessagesList extends Component {
@@ -82,8 +83,20 @@ export default class MessagesList extends Component {
                 }}
               >
                 <Text
-                  style={{ marginLeft: "3%", width: "80%" }}
+                  style={{ marginLeft: "3%", width: "65%" }}
                 >{`${message.name}: ${message.message}`}</Text>
+                {this.state.showPersonalMessages ? (
+                  <Button
+                    success
+                    style={{ marginRight: "1%" }}
+                    onPress={async () => {
+                      await this.props.setSelectedPinId(message.id);
+                      Actions.update();
+                    }}
+                  >
+                    <Text> U </Text>
+                  </Button>
+                ) : null}
                 {this.state.showPersonalMessages ? (
                   <Button
                     danger

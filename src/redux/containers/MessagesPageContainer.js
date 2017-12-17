@@ -15,7 +15,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     getPins: (id, token) => dispatch(getPinsProcess(id, token)),
-    onDeletePin: (id, token) => dispatch(deletePinProcess(id, token))
+    onDeletePin: (id, token) => dispatch(deletePinProcess(id, token)),
+    setSelectedPinId: id => dispatch({ type: "SET_SELECTED_PIN_ID", id })
   };
 }
 
