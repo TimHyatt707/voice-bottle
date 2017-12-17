@@ -10,7 +10,6 @@ export default function deletePinProcess(id, token) {
       dispatch({ type: "DELETE_PIN", deletedPin });
       return deletedPin;
     } catch (error) {
-      console.log(error);
       return error;
     }
   };

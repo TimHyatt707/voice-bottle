@@ -18,7 +18,6 @@ export default class Map extends Component {
   }
 
   render() {
-    console.log(this.props.latitude, this.props.longitude);
     let lat = 0;
     let long = 0;
     if (this.props.latitude === null && this.props.longitude === null) {

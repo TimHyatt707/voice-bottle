@@ -35,10 +35,11 @@ export default function rootReducer(
         markers: [...currentState.markers, action.createdPin]
       };
     case "DELETE_PIN":
-      console.log(markers, action.deletedPin);
       return {
         ...currentState,
-        markers: markers.filter(marker => marker.id !== action.deletedPin.id)
+        markers: currentState.markers.filter(
+          marker => marker.id !== action.deletedPin.id
+        )
       };
     default:
       return currentState;
