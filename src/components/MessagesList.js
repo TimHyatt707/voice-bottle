@@ -6,15 +6,29 @@ import getLocation from "../redux/thunks/getLocationProcess";
 export default class MessagesList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showPersonalMessages: true,
+      loading: false
+    };
+    this._handleToggle = this._handleToggle.bind(this);
   }
 
   componentDidMount() {
     this.props.getPins(this.props.id, this.props.token);
   }
 
+  _handleToggle() {
+    if (this.state.showPersonalMessages) {
+      this.setState({ showPersonalMessages: false });
+    } else {
+      this.setState({ showPersonalMessages: true });
+    }
+  }
+
   render() {
     let pins = this.props.markers;
-    if (pins === null) {
+    if (!pins) this.setState({ loading: true });
+    if (this.state.loading) {
       return (
         <Content
           style={{
@@ -30,13 +44,30 @@ export default class MessagesList extends Component {
       );
     } else {
       let messages = [];
-      for (let i = 0; i < pins.length; i++) {
-        if (pins[i].user_id === this.props.id) {
-          messages.push(pins[i]);
+      if (this.state.showPersonalMessages) {
+        for (let i = 0; i < pins.length; i++) {
+          if (pins[i].user_id === this.props.id) {
+            messages.push(pins[i]);
+          }
         }
-      }
+      } else messages = pins;
       return (
         <Content>
+          <Button
+            success
+            onPress={this._handleToggle}
+            style={{
+              alignSelf: "center",
+              marginTop: "10%",
+              marginBottom: "5%"
+            }}
+          >
+            <Text>
+              {this.state.showPersonalMessages
+                ? " Show All Messages "
+                : " Show My Messages "}
+            </Text>
+          </Button>
           <List
             dataArray={messages}
             renderRow={message => (
@@ -52,16 +83,18 @@ export default class MessagesList extends Component {
                 }}
               >
                 <Text
-                  style={{ marginLeft: "3%" }}
+                  style={{ marginLeft: "3%", width: "80%" }}
                 >{`${message.name}: ${message.message}`}</Text>
-                <Button
-                  danger
-                  onPress={() => {
-                    this.props.onDeletePin(message.id, this.props.token);
-                  }}
-                >
-                  <Text> X </Text>
-                </Button>
+                {this.state.showPersonalMessages ? (
+                  <Button
+                    danger
+                    onPress={() => {
+                      this.props.onDeletePin(message.id, this.props.token);
+                    }}
+                  >
+                    <Text> X </Text>
+                  </Button>
+                ) : null}
               </ListItem>
             )}
           />
