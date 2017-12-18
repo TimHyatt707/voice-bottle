@@ -6,8 +6,11 @@ import MapView from "react-native-maps";
 export default class Map extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      region: null
+    };
     this._handleMarkers = this._handleMarkers.bind(this);
+    this.onRegionChange = this.onRegionChange.bind(this);
   }
 
   _handleMarkers(e) {
@@ -15,6 +18,10 @@ export default class Map extends Component {
       this.props.getNearbyMarkers({
         coordinates: `${this.props.latitude},${this.props.longitude}`
       });
+  }
+
+  onRegionChange(region) {
+    this.setState({ region });
   }
 
   render() {
@@ -54,6 +61,7 @@ export default class Map extends Component {
           minZoomLevel={16}
           maxZoomLevel={20}
           onMapReady={this._handleMarkers}
+          onRegionChange={this.onRegionChange}
         >
           <MapView.Marker
             title="You"
