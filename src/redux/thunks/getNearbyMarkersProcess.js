@@ -5,6 +5,7 @@ export default function getNearbyMarkersProcess(coords) {
     try {
       let markers = await getNearbyMarkers(coords);
       dispatch({ type: "SET_MARKERS", markers });
+      return markers;
     } catch (error) {
       console.log(error.message);
     }
