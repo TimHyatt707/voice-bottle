@@ -2,6 +2,10 @@
 Mobile android application for leaving geo-tagged voice messages. You can record messages and read other nearby
 messages left by other users.
 
+DEMO VIDEO
+
+[![IMAGE ALT TEXT HERE](https://i.imgur.com/nVP3A8Z.png)](https://youtu.be/P5FWPmtNTlk)
+
 ## Getting Started
 
 Make an account
