@@ -12,7 +12,7 @@
     "expo": "^23.0.6",
     "native-base": "^2.3.3",
     "react": "16.0.0",
-    "react-native": "0.50.4",
+    "react-native": "^0.51.0",
     "react-native-audio": "^3.5.0",
     "react-native-config": "^0.11.1",
     "react-native-maps": "^0.18.3",
@@ -40,6 +40,14 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "setupFiles": ["./setupJest.js"]
+    "setupFiles": [
+      "./setupJest.js"
+    ],
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "!node_modules/react-runtime"
+    ]
   }
 }
